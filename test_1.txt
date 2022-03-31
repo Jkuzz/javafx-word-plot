@@ -1,0 +1,7 @@
+The task is to implement a JavaFX application that allows the user to select a text file and display the counts of individual words for this file using a graph type, which is available in JavaFX, e.g., a pie-chart.
+
+Submit this Maven project to ReCodEx. It contains a pre-built structure for your implementation.
+
+Submit the project as a ZIP archive.
+
+ReCodEx will only verify whether the project is compilable, while the other parts will be evaluated by your teacher.
