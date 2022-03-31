@@ -1,22 +1,14 @@
 package cz.cuni.mff.java.hw.fxwords;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderRepeat;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 public class Main extends Application {
     private static BarChart<String, Number> makeChart() {
@@ -24,7 +16,10 @@ public class Main extends Application {
         xAxis.setLabel("Words");
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Occurrences");
-        return new BarChart<>(xAxis, yAxis);
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setBarGap(0.15);
+        barChart.setMinWidth(800);
+        return barChart;
     }
 
 
@@ -39,8 +34,10 @@ public class Main extends Application {
 
         BorderPane appPane = new BorderPane();
         appPane.setPadding(new Insets(20, 20, 20, 20));
-        VBox vbox = new VBox(fileChooserButton, barChart);
-        appPane.setCenter(vbox);
+        appPane.setTop(fileChooserButton);
+        appPane.setCenter(barChart);
+        appPane.setMinWidth(barChart.getMinWidth());
+        stage.setMinWidth(appPane.getMinWidth() + appPane.getPadding().getLeft() + appPane.getPadding().getRight());
         return new Scene(appPane);
     }
 

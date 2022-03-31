@@ -24,6 +24,7 @@ public record FileChosenListener(BarChart<String, Number> wordsChart,
         if (chosenFile == null) {
             return;
         }
+
         String text;
         try {
             text = Files.readString(Path.of(chosenFile.getPath()));
@@ -34,6 +35,7 @@ public record FileChosenListener(BarChart<String, Number> wordsChart,
             return;
         }
         LinkedHashMap<String, Integer> countedWords = countWords(text);
+
         while (wordsChart.getData().size() > 0) {  // clear previous series
             wordsChart.getData().remove(0);
         }
@@ -50,7 +52,7 @@ public record FileChosenListener(BarChart<String, Number> wordsChart,
         }
         dataSeries.setName(chosenFile.getAbsolutePath());
         wordsChart.getData().add(dataSeries);
-
+        wordsChart.setAnimated(false);  // To update axes properly
     }
 
     private LinkedHashMap<String, Integer> countWords(String text) {
@@ -62,7 +64,6 @@ public record FileChosenListener(BarChart<String, Number> wordsChart,
             }
             wordCounts.put(word, oldCount + 1);
         }
-
         return wordCounts;
     }
 }
